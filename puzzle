@@ -1,0 +1,134 @@
+#include <iostream>
+using namespace std;
+void main()
+{
+	int x[3][3];
+	int i, j, k, l, sRow, sCol, rSwap, cSwap, region, temp, copy, flag;
+	char direc;
+	cout << "Enter a 3 x 3 matrix" << endl;
+	for (int m = 0; m < 3; m++)
+	{
+		for (int n = 0; n < 3; n++)
+		{
+			cin >> x[m][n];
+		}
+	}
+  
+  
+	for (int m = 0; m < 3; m++)
+	{
+		for (int n = 0; n < 3; n++)
+		{
+			cout << x[m][n] << " ";
+		}
+		cout << endl;
+	}
+  
+  
+	for (   ;   ;   )
+	{
+		flag = 0;
+		cout << "Choose a region: " << endl << "1 for top left" <<
+			endl << "2 for top right" << endl << "3 for bottom left" << endl << "4 for bottom right" << endl;
+
+		cin >> region;
+
+		cout << "Enter direction (l,r)" << endl;
+
+		cin >> direc;
+
+		if (region == 1)
+		{
+			sRow = 0;
+			sCol = 0;
+		}
+		if (region == 2)
+		{
+			sRow = 0;
+			sCol = 1;
+		}
+		if (region == 3)
+		{
+			sRow = 1;
+			sRow = 0;
+		}
+		if (region == 4)
+		{
+			sRow = 1;
+			sCol = 1;
+		}
+
+
+		rSwap = sRow;
+		cSwap = sCol + 1;
+		i = sRow;
+		k = sCol;
+    
+		for (j = 0; j < 3; j++)
+		{
+			temp = x[i][k];
+			x[i][k] = x[rSwap][cSwap];
+			x[rSwap][cSwap] = temp;
+			if (j == 0)
+			{
+				if (direc == 'l')
+				{
+					k++;
+					rSwap++;
+				}
+
+				if (direc == 'r')
+				{
+					rSwap++;
+					cSwap--;
+				}
+			}
+			if (j == 1)
+			{
+				if (direc == 'l')
+				{
+					i++;
+					k--;
+				}
+				if (direc == 'r')
+				{
+					i++;
+					k++;
+				}
+			}
+		}
+
+		for (int m = 0; m < 3; m++)
+		{
+			for (int n = 0; n < 3; n++)
+			{
+				cout << x[m][n] << " ";
+			}
+			cout << endl;
+		}
+
+		copy = x[0][0];
+
+		for (int m = 0; m < 3; m++)
+		{
+			for (int n = 0; n < 3; n++)
+			{
+				if (x[m][n] < copy)
+				{
+					flag = 1;
+				}
+					copy = x[m][n];
+				
+			}
+		}
+
+		if (flag == 0)
+		{
+			cout << "Congratulations!" << endl;
+			break;
+		}
+
+	}
+	system("pause");
+
+}
